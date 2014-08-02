@@ -7,8 +7,8 @@ app.set('views', process.argv[3]);
 app.set('view engine', 'jade');
 
 /*
-app.get('/home', function(req, res){
-	res.end('Hello World!');
+app.get('/home', function (req, res) {
+  res.end('Hello World!');
 })
 */
 
@@ -32,7 +32,6 @@ app.post('/form', function(req, res){
 app.use(express.static(process.argv[3] || path.join(__dirname, 'public')));
 */
 
-
 /*
 var stylus = require('stylus');
 
@@ -40,26 +39,33 @@ app.use(stylus.middleware(process.argv[3]));
 app.use(express.static(process.argv[3]));
 */
 
-//ok, i give up
 /*
-app.put(process.argv[3], function(req, res){
-  req.params.NAME
+app.put('/message/:id', function (req, res) {
+  var id = req.params.id
+  var result = require('crypto')
+    .createHash('sha1')
+    .update(new Date().toDateString() + id)
+    .digest('hex')
+  res.end(result)
 });
 */
 
 /*
-app.get('/search',function(req, res){
-  var data = JSON.stringify(req.query);
+app.get('/search', function (req, res) {
+  var data = req.query;
+  //console.log(data)
+  //var data = JSON.stringify(str);
   res.send(data);
 });
 */
 
-/*
 var fs = require('fs');
-fs.readFile(process.argv[3], function(err, data){
-	if(err) throw err;
-	var obj = JSON.parse(data);
-	var content = res.json(obj);
-	res.send(content);
+var obj;
+fs.readFile(process.argv[3], function (err, data) {
+  if (err) throw err;
+  obj = JSON.parse(data);
+
 });
-*/
+app.get('/books', function (req, res) {
+  res.json(obj);
+});
